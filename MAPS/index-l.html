@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link href="style.css" rel="stylesheet" />
+  <style>
+  .pagination li {
+  display:inline-block;
+  padding:5px;
+}
+</style>
+</head>
+<body>
+ <script src="./list.js"></script>
+ <script src="layers/lug_2.js"></script>
+ <div id="users">
+  <input class="search" placeholder="Search" />
+  <button class="sort" data-sort="nome">
+    Sort by name
+  </button>
+  <button class="sort" data-sort="zona">
+    Sort by zona
+  </button>
+ <button onClick="regf('Piemonte')"> Piemonte </button >
+<button onClick="regf('Lombardia')"> Lombardia </button>
+<button onClick="regf(null)"> Tutti </button>
+  <div id="lista">
+ <table>
+    <tbody class="list"> 
+      </tbody >
+  </div> 
+  
+ <script>
+ var reg = null
+ </script>
+ 
+  <script>
+function regf (reg) {
+userList.filter(function(item) {
+if (reg == null) {userList.filter()}
+else
+if (item.values().regione == reg) {
+   return true;
+} else {
+   return false;
+}
+});
+};
+ </script>
+ 
+ <script>
+const json_2 = json_lug_2.features.map (function (el) {
+return  {"zona": el.properties.zona, 
+		"nome": el.properties.nome, 
+		"provincia": el.properties.provincia, 
+		"URL": el.properties.URL,
+		"regione": el.properties.regione };
+	} );
+
+</script>
+
+<script >
+var options = {
+  valueNames: [ 'nome', 'zona', 'URL', 'regione'],
+  <!-- item: '<li><h3 class="nome"></h3><p class="zona"></p><p class="URL"></p></li>' -->
+  item: '<tr> <td class="nome"></td><td class="zona"></td><td class="URL"></td></tr>',
+ // page: 10,
+ // pagination: true
+  }; </script>
+  
+<script> var userList = new List('users', options, json_2); </script>
+
+ <script>
+console.log(json_lug_2); 
+console.log(json_lug_2.features); 
+console.log(json_lug_2.features[0].properties.zona); 
+console.log(json_2);
+console.log(reg);
+</script>
+</div> 
+ <ul class="pagination"></ul>
+ </div> 
+</body>
+</html>
